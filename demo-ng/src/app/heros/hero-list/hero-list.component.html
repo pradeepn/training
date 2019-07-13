@@ -1,0 +1,26 @@
+<div  class="pull-left"><h5>Hero List ({{ (flyFilter ? (heroData | canFly).length : heroData.length) }})</h5></div>
+<div  class="pull-right">
+<div class="custom-control custom-switch">
+  <input type="checkbox" class="custom-control-input" id="flySwitch" [(ngModel)]="flyFilter">
+  <label class="custom-control-label font-weight-bold text-primary" for="flySwitch">Fly</label>
+</div>
+</div>
+<table class="table table-bordered table-striped table-condendsed">
+<thead>
+  <th>Id</th>
+  <th>Name</th>
+  <th>Gender</th>
+  <th>Action</th>
+</thead>
+<tbody>
+  <tr *ngFor="let hero of (flyFilter ? (heroData | canFly) : heroData)">
+    <td>{{ hero.id }}</td>
+    <td>{{ hero.name }}</td>
+    <td>{{ hero.gender }}</td>
+    <td><a class="btn btn-primary btn-sm" routerLink="/heros/{{ hero.id }}" href="#" role="button">Hero Detail</a></td>
+  </tr>
+</tbody>
+</table>
+<div class="well-lg">
+  {{ heroData | json }}
+</div>

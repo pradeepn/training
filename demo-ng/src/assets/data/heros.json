@@ -1,0 +1,7 @@
+[
+    {"id":1, "name":"Superman", "gender":"Male", "canFly": true },
+    {"id":2, "name":"Spiderman", "gender":"Male", "canFly": false},
+    {"id":3, "name":"Batman", "gender":"Male", "canFly": false},
+    {"id":4, "name":"Ironman", "gender":"Male","canFly": true},
+    {"id":5, "name":"Wonderwomen", "gender":"Female","canFly": false}
+]
