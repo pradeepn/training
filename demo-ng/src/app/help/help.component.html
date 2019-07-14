@@ -1,0 +1,26 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-6">
+      Name: <input type="text" [(ngModel)]="name">
+      Value: <strong>{{ name | uppercase}}</strong>
+      <button disabled='{{isDisabled}}'>Click</button>
+      <button [disabled]='isDisabled' (click)="btnClick()">Click</button>
+      <h1>{{ isDisabled }}</h1>
+      <h1 [innerHtml]="isDisabled"></h1>
+      <h2>{{ date | date:'MM-dd-yyyy' }}</h2>
+       
+    </div>
+    <div class="col-md-6">
+      <div class="radio-inline">
+        <label><input type="radio" [(ngModel)]="gender" value="Male">Male</label>
+      </div>
+      <div class="radio-inline">
+        <label><input type="radio" [(ngModel)]="gender" value="Female">Female</label>
+      </div>
+      <div>
+        <span [ngStyle]="{'color':getColor(gender),'font-weight': 'bold'}">{{ gender }}</span>
+      </div>
+    </div>
+  </div>
+  <hr>
+</div>>
