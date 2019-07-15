@@ -6,17 +6,9 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
-  name: string;
-  isDisabled: boolean;
-  date: Date;
-  constructor() { 
-    this.name = "Hello World";
-    this.isDisabled = false;
-    this.date = new Date();
+  constructor() {
+
   }
-btnClick() {
-  alert('clicked');
-}
   ngOnInit() {
   }
 

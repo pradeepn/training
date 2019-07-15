@@ -5,26 +5,26 @@ import { EventEmitter } from '@angular/core';
   providedIn: 'root'
 })
 
-export class AuthserviceService {
+export class AuthService {
   @Output() loggedIn: EventEmitter<any> = new EventEmitter();
   constructor(private myRoute: Router) { }
   sendToken(token: string) {
-    localStorage.setItem("auth-token", token);
+    localStorage.setItem('auth-token', token);
     this.loggedIn.emit(true);
   }
   getToken() {
-    return localStorage.getItem("auth-token");
+    return localStorage.getItem('auth-token');
   }
   isLoggedIn() {
     this.loggedIn.emit(this.getToken() !== null);
     if (this.getToken() == null) {
-      this.myRoute.navigate(["login"]);
+      this.myRoute.navigate(['login']);
     }
     return this.getToken() !== null;
   }
   logout() {
-    localStorage.removeItem("auth-token");
+    localStorage.removeItem('auth-token');
     this.loggedIn.emit(false);
-    this.myRoute.navigate(["login"]);
+    this.myRoute.navigate(['login']);
   }
 }

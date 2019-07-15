@@ -14,8 +14,9 @@ import { HomeComponent } from './home/home.component';
 import { SharedModule } from './shared/shared.module';
 import { RouterModule } from '@angular/router';
 import { LoginComponent } from './login/login.component';
-import { AuthgruardGuard } from './guards/authgruard.guard';
-import { AuthserviceService } from './services/authservice.service';
+import { AuthGuard } from './guards/auth.guard';
+import { AuthService } from './services/auth.service';
+import { HelpComponent } from './help/help.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -26,7 +27,8 @@ import { AuthserviceService } from './services/authservice.service';
     ContactComponent,
     PageNotFoundComponent,
     HomeComponent,
-    LoginComponent
+    LoginComponent,
+    HelpComponent
   ],
   imports: [
     BrowserModule,
@@ -37,7 +39,7 @@ import { AuthserviceService } from './services/authservice.service';
     ReactiveFormsModule
   ],
   exports: [],
-  providers: [AuthgruardGuard, AuthserviceService],
+  providers: [AuthGuard, AuthService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

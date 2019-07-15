@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
-import { AuthserviceService } from '../services/authservice.service';
+import { AuthService } from '../services/auth.service';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -9,8 +9,8 @@ import { AuthserviceService } from '../services/authservice.service';
 })
 export class LoginComponent implements OnInit {
   private form;
-  constructor(private auth: AuthserviceService, private myRoute: Router,
-    private formBuilder: FormBuilder, private activeRoute: ActivatedRoute) { 
+  constructor(private auth: AuthService, private myRoute: Router,
+    private formBuilder: FormBuilder, private activeRoute: ActivatedRoute) {
     this.form = formBuilder.group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', Validators.required]
@@ -18,7 +18,7 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit() {
-    if (this.myRoute.url == '/logout') {
+    if (this.myRoute.url === '/logout') {
       this.auth.logout();
     }
   }
