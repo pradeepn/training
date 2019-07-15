@@ -17,7 +17,7 @@
       <div class="radio-inline">
         <label><input type="radio" [(ngModel)]="gender" value="Female">Female</label>
       </div>
-      <div>
+      <div hilight [hilightColor]="bgColor">
         <span [ngStyle]="{'color':getColor(gender),'font-weight': 'bold'}">{{ gender }}</span>
       </div>
     </div>

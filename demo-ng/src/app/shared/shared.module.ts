@@ -2,8 +2,9 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { CanFlyPipe } from '../pipes/can-fly.pipe';
+import { HilightDirective } from './hilight.directive';
 @NgModule({
-  declarations: [CanFlyPipe],
+  declarations: [CanFlyPipe, HilightDirective],
   imports: [
     CommonModule,
     FormsModule
@@ -11,7 +12,8 @@ import { CanFlyPipe } from '../pipes/can-fly.pipe';
   exports: [
     CommonModule,
     FormsModule,
-    CanFlyPipe
+    CanFlyPipe,
+    HilightDirective
   ]
 })
 export class SharedModule { }
