@@ -17,6 +17,10 @@ import { LoginComponent } from './login/login.component';
 import { AuthGuard } from './guards/auth.guard';
 import { AuthService } from './services/auth.service';
 import { HelpComponent } from './help/help.component';
+import { VersionParentComponent } from './version/version-parent/version-parent.component';
+import { VersionChildComponent } from './version/version-child/version-child.component';
+import { VersionFooterComponent } from './version/version-footer/version-footer.component';
+import { VersionService } from './version/version.service';
 @NgModule({
   declarations: [
     AppComponent,
@@ -28,7 +32,10 @@ import { HelpComponent } from './help/help.component';
     PageNotFoundComponent,
     HomeComponent,
     LoginComponent,
-    HelpComponent
+    HelpComponent,
+    VersionParentComponent,
+    VersionChildComponent,
+    VersionFooterComponent
   ],
   imports: [
     BrowserModule,
@@ -38,8 +45,8 @@ import { HelpComponent } from './help/help.component';
     FormsModule,
     ReactiveFormsModule
   ],
-  exports: [],
-  providers: [AuthGuard, AuthService],
+  exports: [SharedModule],
+  providers: [AuthGuard, AuthService, VersionService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -17,10 +17,20 @@
       <div class="radio-inline">
         <label><input type="radio" [(ngModel)]="gender" value="Female">Female</label>
       </div>
-      <div hilight [hilightColor]="bgColor">
+      <div hilight>
         <span [ngStyle]="{'color':getColor(gender),'font-weight': 'bold'}">{{ gender }}</span>
+        
+        
       </div>
+      <div ngNonBindable>{{ gender }}</div>
     </div>
   </div>
   <hr>
+  <app-card [showHeader]=false [showFooter]=false [loading]=false>
+    <!-- <card-body>
+      <p> This is a body content situatetd inside a card body.</p>
+      <p> This is a body content situatetd inside a card body.</p>
+      <p> This is a body content situatetd inside a card body.</p>
+    </card-body> -->
+  </app-card>
 </div>>

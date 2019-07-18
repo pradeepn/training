@@ -1,0 +1,8 @@
+<div class="bg-primary text-white" style="padding:10px;">
+    <h2>Current App Version</h2>
+<button (click)="newMinor()" class="btn btn-warning">Add Minor Version</button>&nbsp;
+<button (click)="newMajor()" class="btn btn-warning">Add Major Version</button>
+<br/>
+<span>{{ childMessage }}</span>
+<app-version-child [major]="major" [minor]="minor" (parentMessage)=messageFromChild($event)></app-version-child>
+</div>
