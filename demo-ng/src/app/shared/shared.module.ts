@@ -1,19 +1,30 @@
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { CanFlyPipe } from '../pipes/can-fly.pipe';
 import { HilightDirective } from './hilight.directive';
+import { CardComponent } from './card/card.component';
+import { HttpClientModule } from '@angular/common/http';
 @NgModule({
-  declarations: [CanFlyPipe, HilightDirective],
+  declarations: [
+    CanFlyPipe,
+    HilightDirective,
+    CardComponent
+  ],
   imports: [
     CommonModule,
-    FormsModule
+    HttpClientModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
   exports: [
     CommonModule,
+    HttpClientModule,
     FormsModule,
+    ReactiveFormsModule,
     CanFlyPipe,
-    HilightDirective
+    HilightDirective,
+    CardComponent
   ]
 })
 export class SharedModule { }

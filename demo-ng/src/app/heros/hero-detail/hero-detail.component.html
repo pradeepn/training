@@ -21,3 +21,10 @@
   </tr>
 </tbody>
 </table>
+<button class="btn btn-primary" (click)="getData()">Get</button>
+<hr/>
+<button class="btn btn-primary" *ngFor="let user of users.data" (click)="getUser(user.id)">User-{{ user. id }}</button>&nbsp;&nbsp;
+<hr/>
+{{ users | json }}
+<hr/>
+{{ user | json }}

@@ -1,0 +1,12 @@
+<div class="bg-warning text-white" style="padding:10px;margin: 10px auto;width: 95%;">
+    <h3> Version {{ major }}.{{ minor }} </h3>
+    <input type="button" class="btn btn-primary" value="Message Parent" (click)=sendParentMessage()/>&nbsp;
+    <input type="button" class="btn btn-primary" value="Message to Footer" (click) = updateVersion()/>
+</div>
+<br/>
+<div class="well">
+    <span>
+        {{ change | json}}
+    </span>
+   <textarea rows="100" cols="100">{{ log }}</textarea>
+</div>

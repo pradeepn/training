@@ -1,26 +1,155 @@
-<div  class="pull-left"><h5>Hero List ({{ (flyFilter ? (heroData | canFly).length : heroData.length) }})</h5></div>
-<div  class="pull-right">
-<div class="custom-control custom-switch">
-  <input type="checkbox" class="custom-control-input" id="flySwitch" [(ngModel)]="flyFilter">
-  <label class="custom-control-label font-weight-bold text-primary" for="flySwitch">Fly</label>
+<div class="row">
+  <div class="col-12">
+    <div  class="pull-left"><h5>Hero List ({{ (flyFilter ? (heroData | canFly).length : heroData.length) }})</h5></div>
+    <div  class="pull-right">
+    <div class="custom-control custom-switch">
+      <input type="checkbox" class="custom-control-input" id="flySwitch" [(ngModel)]="flyFilter">
+      <label class="custom-control-label font-weight-bold text-primary" for="flySwitch">Fly</label>
+    </div>
+    </div>
+  </div>
+  <div class="col-8">  
+  <table class="table table-bordered table-striped table-condendsed">
+  <thead>
+    <th>Id</th>
+    <th>Name</th>
+    <th>Gender</th>
+    <th>Action</th>
+  </thead>
+  <tbody>
+    <tr *ngFor="let hero of (flyFilter ? (heroData | canFly) : heroData)">
+      <td>{{ hero.id }}</td>
+      <td>{{ hero.name }}</td>
+      <td>{{ hero.gender }}</td>
+      <td><a class="btn btn-primary btn-sm" routerLink="/heros/{{ hero.id }}" href="#" role="button">Hero Detail</a></td>
+    </tr>
+  </tbody>
+  </table>
+
+  </div>
+  <div class="col-4">
+    <div class="card">
+    <div class="card-body" >
+      <p>
+      {{ heroData | json }}
+    </p>
+    <hr/>
+    <p>
+      {{ hero | json }}
+    </p><hr/>
+    <!-- <p>
+      {{ heroForm | json }}
+    </p> -->
+    <p>
+      {{ heroReactiveForm.value | json }}
+    </p><hr/>
+    </div>
+  </div>
+  </div>
 </div>
-</div>
-<table class="table table-bordered table-striped table-condendsed">
-<thead>
-  <th>Id</th>
-  <th>Name</th>
-  <th>Gender</th>
-  <th>Action</th>
-</thead>
-<tbody>
-  <tr *ngFor="let hero of (flyFilter ? (heroData | canFly) : heroData)">
-    <td>{{ hero.id }}</td>
-    <td>{{ hero.name }}</td>
-    <td>{{ hero.gender }}</td>
-    <td><a class="btn btn-primary btn-sm" routerLink="/heros/{{ hero.id }}" href="#" role="button">Hero Detail</a></td>
-  </tr>
-</tbody>
-</table>
-<div class="well-lg">
-  {{ heroData | json }}
+<hr/>
+<div class="row">
+  <div class="col-6">
+    <form #heroForm="ngForm" (ngSubmit)="saveHero()">
+    <div class="card">
+      <div class="card-header">
+          <h6>Add Hero - Template Driven</h6>
+      </div>
+      <div class="card-body">
+      <div class="form-group">
+        <label for="Name">Name</label>
+        <input type="text" class="form-control" placeholder="Hero Name" [(ngModel)]="hero.name" id="name" name="name" required minlength="5" #name="ngModel">
+        <div class="form-control-feedback alert alert-danger" *ngIf="name.errors && (name.dirty || name.touched)">
+          <p *ngIf="name.errors.required">Name is required</p>
+          <p *ngIf="name.errors.minlength">Name must contain at least the 5 character</p>
+        </div>
+      </div>
+      <div class="form-group">
+        <!-- <label for="Name">Gender</label>
+        <div class="form-check-label"> -->
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" name="Gender" id="Male" value="Male"  [(ngModel)]="hero.gender" required #gender="ngModel">
+          <label class="form-check-label" for="Male">Male</label>
+        </div>
+        <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name="Gender" id="Female" value="Female" [(ngModel)]="hero.gender" required #gender="ngModel">
+            <label class="form-check-label" for="Female">Female</label>
+        </div>
+        <div class="form-control-feedback alert alert-danger" *ngIf="gender.errors && (gender.dirty || gender.touched)">
+            <p *ngIf="gender.errors.required">Genderr is required</p>
+          </div>
+        <!-- </div> -->
+      </div>
+      <div class="form-group">
+        <div class="form-check">
+          <input type="checkbox" class="form-check-input" name="CanFly" id="CanFly" [(ngModel)]="hero.canFly" required #canfly="ngModel"> 
+          <label class="form-check-label" for="CanFly">Can Fly</label>
+        </div>
+        <div class="form-control-feedback alert alert-danger" *ngIf="canfly.errors && (canfly.dirty || canfly.touched)">
+            <p *ngIf="canfly.errors.required">Can Fly is required</p>
+          </div>
+      </div>       
+      </div>
+      <div class="card-footer">
+        <div class="pull-right">
+          <button type="submit"  class="btn btn-primary">Save</button> &nbsp;
+          <button type="button" class="btn btn-secondary" (click)="heroForm.resetForm()">Clear</button>
+        </div>
+      </div>
+    </div>
+    </form>  
+  </div>
+  <div class="col-6">
+    <form [formGroup]="heroReactiveForm" (ngSubmit)="onHeroSubmit()">
+      <div class="card">
+        <div class="card-header">
+            <h6>Add Hero - Reactive Forms</h6>
+        </div>
+        <div class="card-body" >
+            <div class="form-group">
+              <label for="Name">Name</label>
+              <input type="text" class="form-control" placeholder="Hero Name" formControlName="name">
+              <div class="form-control-feedback alert alert-danger" *ngIf="heroReactiveForm.get('name').hasError('required')">
+                Please provide a name!
+              </div>
+              <!-- <div class="form-control-feedback alert alert-danger" *ngIf="name.errors && (name.dirty || name.touched)">
+                <p *ngIf="name.errors.required">Name is required</p>
+                <p *ngIf="name.errors.minlength">Name must contain at least the 5 character</p>
+              </div> -->
+            </div>
+            <div class="form-group">
+              <!-- <label for="Name">Gender</label>
+              <div class="form-check-label"> -->
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" formControlName="gender" value="Male">
+                <label class="form-check-label" for="Male">Male</label>
+              </div>
+              <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="radio" formControlName="gender" value="Female">
+                  <label class="form-check-label" for="Female">Female</label>
+              </div>
+              <!-- <div class="form-control-feedback alert alert-danger" *ngIf="gender.errors && (gender.dirty || gender.touched)">
+                  <p *ngIf="gender.errors.required">Genderr is required</p>
+                </div> -->
+              <!-- </div> -->
+            </div>
+            <div class="form-group">
+              <div class="form-check">
+                <input type="checkbox" class="form-check-input" formControlName="canFly"> 
+                <label class="form-check-label" for="CanFly">Can Fly</label>
+              </div>
+              <!-- <div class="form-control-feedback alert alert-danger" *ngIf="canfly.errors && (canfly.dirty || canfly.touched)">
+                  <p *ngIf="canfly.errors.required">Can Fly is required</p>
+                </div> -->
+            </div>       
+            </div>
+        <div class="card-footer">
+            <div class="pull-right">
+              <button type="submit" class="btn btn-primary">Save</button> &nbsp;
+              <button type="button" class="btn btn-secondary" [disabled]="!heroReactiveForm.valid">Clear</button>
+            </div>
+          </div>
+        </div>
+        </form>  
+  </div>
 </div>
