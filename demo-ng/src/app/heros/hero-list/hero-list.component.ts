@@ -40,7 +40,7 @@ saveHero() {
 onHeroSubmit() {
   var data = this.heroReactiveForm.value;
   data['id'] = this.heroData.length + 1;
-  if (this.heroReactiveForm.  ) {
+  if (this.heroReactiveForm.valid) {
     this.heroData.push(data);
   }
 }
